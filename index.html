@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>twoseam</title>
+<script>
+(function(){
+  var t = localStorage.getItem("theme");
+  if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
 <style>
   :root {
     --paper: #fbfaf7;
@@ -23,6 +29,24 @@
       --accent: #e2794f;
       --focus-ring: #e2794f;
     }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #121210;
+    --ink: #ece9e0;
+    --muted: #8a887e;
+    --divider: #2b2a26;
+    --accent: #e2794f;
+    --focus-ring: #e2794f;
+  }
+
+  :root[data-theme="light"] {
+    --paper: #fbfaf7;
+    --ink: #14140f;
+    --muted: #6b6a62;
+    --divider: #dedcd3;
+    --accent: #b5482e;
+    --focus-ring: #b5482e;
   }
 
   * { box-sizing: border-box; }
@@ -157,9 +181,34 @@
   @media (max-width: 480px) {
     .row-domain { display: none; }
   }
+
+  .theme-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .theme-btn:hover {
+    background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+  }
+
+  .theme-btn:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
 </style>
 </head>
 <body>
+<button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">DARK</button>
 <main>
   <p class="eyebrow">Directory</p>
   <h1>twoseam.dev</h1>
@@ -231,5 +280,25 @@
     </li>
   </ul>
 </main>
+<script>
+(function(){
+  var btn = document.getElementById("themeBtn");
+  function current(){
+    var attr = document.documentElement.getAttribute("data-theme");
+    if (attr) return attr;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function paint(){
+    btn.textContent = current() === "dark" ? "LIGHT" : "DARK";
+  }
+  btn.addEventListener("click", function(){
+    var next = current() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    paint();
+  });
+  paint();
+})();
+</script>
 </body>
 </html>
