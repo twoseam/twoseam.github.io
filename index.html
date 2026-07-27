@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>twoseam</title>
+<style>
+  :root {
+    --paper: #fbfaf7;
+    --ink: #14140f;
+    --muted: #6b6a62;
+    --divider: #dedcd3;
+    --accent: #b5482e;
+    --focus-ring: #b5482e;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121210;
+      --ink: #ece9e0;
+      --muted: #8a887e;
+      --divider: #2b2a26;
+      --accent: #e2794f;
+      --focus-ring: #e2794f;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+
+  h1 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: clamp(28px, 6vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 40px;
+    text-wrap: balance;
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  a.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 24px;
+    border: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+    outline-offset: 3px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  a.row:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+  }
+
+  a.row:focus-visible {
+    outline: 2px solid var(--focus-ring);
+  }
+
+  a.row:active {
+    background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+  }
+
+  .row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .row-index {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .row-title {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    transition: color 0.15s ease;
+  }
+
+  a.row:hover .row-title,
+  a.row:focus-visible .row-title {
+    color: var(--accent);
+  }
+
+  .row-tagline {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .row-domain {
+    flex-shrink: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .row-arrow {
+    flex-shrink: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 16px;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  a.row:hover .row-arrow,
+  a.row:focus-visible .row-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .row-title, .row-arrow { transition: none; }
+  }
+
+  @media (max-width: 480px) {
+    .row-domain { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Directory</p>
+  <h1>twoseam.dev</h1>
+
+  <ul>
+    <li>
+      <a class="row" href="https://jotlist.io">
+        <span class="row-main">
+          <span class="row-index">01</span>
+          <span class="row-title">Jotlist</span>
+          <span class="row-tagline">Checklists</span>
+        </span>
+        <span class="row-domain">jotlist.io</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="https://cycleslooper.com">
+        <span class="row-main">
+          <span class="row-index">02</span>
+          <span class="row-title">Cycles Looper</span>
+          <span class="row-tagline">Looper controller</span>
+        </span>
+        <span class="row-domain">cycleslooper.com</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="https://twoseam.github.io/flight-log/">
+        <span class="row-main">
+          <span class="row-index">03</span>
+          <span class="row-title">Flight Log</span>
+          <span class="row-tagline">Flight history</span>
+        </span>
+        <span class="row-domain">twoseam.github.io/flight-log</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="https://mikeandxan.com">
+        <span class="row-main">
+          <span class="row-index">04</span>
+          <span class="row-title">Mike &amp; Xan</span>
+        </span>
+        <span class="row-domain">mikeandxan.com</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="https://twoseam.github.io/mileage/">
+        <span class="row-main">
+          <span class="row-index">05</span>
+          <span class="row-title">Mileage</span>
+          <span class="row-tagline">Mileage tracker</span>
+        </span>
+        <span class="row-domain">twoseam.github.io/mileage</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="https://wiggler.app">
+        <span class="row-main">
+          <span class="row-index">06</span>
+          <span class="row-title">Wiggler</span>
+        </span>
+        <span class="row-domain">wiggler.app</span>
+        <span class="row-arrow">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+</main>
+</body>
+</html>
